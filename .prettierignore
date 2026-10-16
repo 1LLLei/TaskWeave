@@ -1,0 +1,6 @@
+node_modules
+package-lock.json
+apps/vscode/dist
+test-results
+*.vsix
+docs/requirements

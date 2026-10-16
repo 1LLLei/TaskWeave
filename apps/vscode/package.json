@@ -1,0 +1,100 @@
+{
+  "name": "taskweave",
+  "displayName": "TaskWeave · 轻量任务规划",
+  "description": "Review editable plans and track verified Codex execution in VS Code.",
+  "version": "0.1.0",
+  "publisher": "taskweave-labs",
+  "license": "MIT",
+  "engines": {
+    "vscode": "^1.95.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "main": "./dist/extension.js",
+  "activationEvents": [
+    "onCommand:taskweave.open",
+    "onView:taskweave.tasks"
+  ],
+  "capabilities": {
+    "untrustedWorkspaces": {
+      "supported": false
+    },
+    "virtualWorkspaces": false
+  },
+  "contributes": {
+    "commands": [
+      {
+        "command": "taskweave.open",
+        "title": "TaskWeave: Open Task Workspace"
+      }
+    ],
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "taskweave",
+          "title": "TaskWeave",
+          "icon": "media/icon.svg"
+        }
+      ]
+    },
+    "views": {
+      "taskweave": [
+        {
+          "type": "webview",
+          "id": "taskweave.tasks",
+          "name": "任务进度"
+        }
+      ]
+    },
+    "configuration": {
+      "title": "TaskWeave",
+      "properties": {
+        "taskweave.codexPath": {
+          "type": "string",
+          "default": "codex",
+          "description": "Codex executable (requires app-server support)."
+        },
+        "taskweave.model": {
+          "type": "string",
+          "default": "",
+          "description": "Optional Codex model override; empty uses Codex configuration."
+        },
+        "taskweave.verificationCommands": {
+          "type": "object",
+          "default": {},
+          "description": "User-approved command registry. Commands require a separate confirmation each time.",
+          "additionalProperties": {
+            "type": "object",
+            "required": [
+              "executable",
+              "args"
+            ],
+            "properties": {
+              "executable": {
+                "type": "string"
+              },
+              "args": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "timeoutMs": {
+                "type": "integer",
+                "minimum": 1000,
+                "maximum": 600000
+              }
+            },
+            "additionalProperties": false
+          }
+        }
+      }
+    }
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/1LLLei/TaskWeave.git",
+    "directory": "apps/vscode"
+  }
+}

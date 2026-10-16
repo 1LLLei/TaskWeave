@@ -1,0 +1,7 @@
+node_modules/
+apps/vscode/dist/
+*.vsix
+coverage/
+.taskweave/
+test-results/
+playwright-report/
